@@ -35,5 +35,5 @@ The original paper can be found [here](https://arxiv.org/abs/2010.11929).
 - [x] Test the model against the official implementation
 - [x] Test the model with a sample image
 - [x] Inspect the model, layer by layer
-- [ ] Train the model on a dataset
+- [ ] Train the model on a custom dataset
 - [ ] Add a demo to test the model on a custom image

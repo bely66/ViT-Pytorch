@@ -29,3 +29,11 @@ The original paper can be found [here](https://arxiv.org/abs/2010.11929).
 3. Run `python inspect.py` to inspect the model, layer by layer. This will print the output of each layer.
 
 
+## Todo
+
+- [x] Implement the ViT model
+- [x] Test the model against the official implementation
+- [x] Test the model with a sample image
+- [x] Inspect the model, layer by layer
+- [ ] Train the model on a dataset
+- [ ] Add a demo to test the model on a custom image

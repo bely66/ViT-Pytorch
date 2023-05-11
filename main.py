@@ -65,12 +65,12 @@ print("Testing custom model vs official model -> Forward pass .....")
 inp = torch.randn(1, 3, 384, 384)
 res_c = model_custom(inp)
 res_o = model_official(inp)
-print("Custom model output shape: ", end="")
 # Asserts
 print("Asserting parameters are equal...")
 assert get_n_params(model_custom) == get_n_params(model_official)
 print("Asserting forward pass is equal...")
 assert_tensors_equal(res_c, res_o)
+
 # Save custom model
 print("Saving custom model to: ", output_path)
 torch.save(model_custom, output_path)

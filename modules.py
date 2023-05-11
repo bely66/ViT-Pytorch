@@ -99,8 +99,6 @@ class Attention(nn.Module):
         attn = (q @ k.transpose(-2, -1)) * self.scale # output shape: (B, num_heads, N, N)
         attn = attn.softmax(dim=-1)
         attn = self.attn_drop(attn)
-        print("Attention Map Shape: ", attn.shape)
-
         x = (attn @ v) # output shape: (B, num_heads, N, head_dim)
         x= x.transpose(1, 2) # output shape: (B, N, num_heads, head_dim)
         x = x.reshape(B, N, C)

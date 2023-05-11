@@ -1,8 +1,20 @@
+import argparse
+
 import numpy as np
 import timm 
 import torch
-import cv2
+
 from modules import VisionTransformer
+
+# Arguments parser (number of classes, output path)
+parser = argparse.ArgumentParser()
+parser.add_argument("--num_classes", type=int, default=3)
+parser.add_argument("--output_path", type=str, default="data/model.pth")
+
+args = parser.parse_args()
+
+num_classes = args.num_classes
+output_path = args.output_path
 
 
 # Helpers
@@ -17,7 +29,7 @@ def assert_tensors_equal(t1, t2):
 
 print("Loading official weights...")
 model_name = "vit_base_patch16_384"
-model_official = timm.create_model(model_name, pretrained=True, num_classes=3)
+model_official = timm.create_model(model_name, pretrained=True, num_classes=num_classes)
 model_official.eval()
 print(type(model_official))
 
@@ -30,7 +42,7 @@ custom_config = {
         "num_heads": 12,
         "qkv_bias": True,
         "mlp_ratio": 4,
-        "num_classes": 3,
+        "num_classes": num_classes,
 }
 
 print("Loading custom weights...")
@@ -60,4 +72,5 @@ assert get_n_params(model_custom) == get_n_params(model_official)
 print("Asserting forward pass is equal...")
 assert_tensors_equal(res_c, res_o)
 # Save custom model
-torch.save(model_custom, "data/model.pth")
+print("Saving custom model to: ", output_path)
+torch.save(model_custom, output_path)
